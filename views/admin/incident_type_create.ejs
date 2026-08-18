@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="adminHMD professional admin dashboard template">
+  <title>Dashboard | Abhaya</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="../css/flash.css">
+</head>
+
+<body>
+  <div class="admin-shell">
+    <div class="sidebar-backdrop" data-sidebar-close></div>
+
+    <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+      <div class="sidebar-header" style="display: flex; justify-content: center;">
+
+        <div>
+          <a class="brand-mark" href="/user/dashboard" aria-label="adminHMD dashboard">
+            <img src="/img/core-img/abhaya-logo.png" alt="Abhaya Logo" style="height: 55px; width: 120px;">
+
+          </a>
+          <span class="brand-title">Admin Dashboard</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link" href="/admin/dashboard" aria-current="page">
+          <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+          <span class="nav-text">Dashboard</span>
+        </a>
+
+        <a href="/user/profile" class="nav-link">
+          <span class="nav-icon"><i class="bi bi-person-badge" aria-hidden="true"></i></span>
+          <span class="nav-text">Profile</span>
+        </a>
+
+        <a href="/sos/all" class="nav-link">
+          <span class="nav-icon"><i class="fas fa-history"></i></span>
+          <span class="nav-text">SOS Alerts</span>
+        </a>
+
+        <a href="/user/all" class="nav-link">
+          <span class="nav-icon"><i class="fa-solid fa-location-dot"></i></span>
+          <span class="nav-text">Users</span>
+        </a>
+
+        <a href="/police/all" class="nav-link">
+          <span class="nav-icon"><i class="fas fa-address-book"></i></span>
+          <span class="nav-text">Police Contacts</span>
+        </a>
+
+        <a href="/report/all" class="nav-link active">
+          <span class="nav-icon"><i class="fas fa-exclamation-circle"></i></span>
+          <span class="nav-text">Incident Report</span>
+        </a>
+
+        <a href="/user/safetytips" class="nav-link">
+          <span class="nav-icon"><i class="fas fa-user-shield"></i></span>
+          <span class="nav-text">Safety Tips</span>
+        </a>
+
+        </a>
+        <a href="/user/settings" class="nav-link">
+          <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+          <span class="nav-text">Settings</span>
+        </a>
+
+      </nav>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span class="sidebar-footer-text">System running smoothly</span>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      <nav class="navbar admin-navbar navbar-expand bg-white">
+        <div class="container-fluid px-3 px-lg-4">
+          <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar"
+            aria-expanded="true" aria-label="Toggle sidebar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+            <input class="form-control search-input" type="search" placeholder="Search users, orders, reports"
+              aria-label="Search">
+          </form>
+
+          <div class="navbar-actions ms-auto">
+            <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme"
+              title="Switch color theme">
+              <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <div class="notification">
+                <button class="icon-button" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                  aria-label="Notifications">
+
+                  <i class="bi bi-bell" aria-hidden="true" id="bell"></i>
+                  <span id="count" class="notificationbadge">0</span>
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-end notification-menu" id="notificationBox">
+                  <div class="dropdown-header fw-bold text-body">Notifications</div>
+
+                </div>
+              </div>
+            </div>
+            <div class="dropdown">
+
+              <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+
+                <span class="d-none d-sm-inline">
+                  <%= userData.name %>
+                </span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
+                <li><a class="dropdown-item" href="/user/settings">Account settings</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="/auth/logout">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          <div class="page-heading">
+            <div class="page-heading-copy">
+              <span class="page-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+              <div>
+                <p class="eyebrow mb-1">Overview</p>
+                <h1 class="h3 mb-1">Report Incident</h1>
+                <p class="text-muted mb-0">Empowering women's safety through real-time monitoring, user verification,
+                  and emergency response management.</p>
+              </div>
+            </div>
+
+            <a href="/report/all"><button class="btn btn-success">Back Incident Report</button></a>
+
+          </div>
+
+          <% if (success && success.length> 0) { %>
+            <div id="successAlert" class="custom-alert success-alert">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>
+                    <%= success[0] %>
+                </span>
+                <button type="button" class="alert-close" onclick="this.parentElement.remove()">
+                    &times;
+                </button>
+            </div>
+            <% } %>
+
+                <% if (error && error.length> 0) { %>
+                    <div id="errorAlert" class="custom-alert error-alert">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span>
+                            <%= error[0] %>
+                        </span>
+                        <button type="button" class="alert-close" onclick="this.parentElement.remove()">
+                            &times;
+                        </button>
+                    </div>
+                    <% } %>
+
+          <div class="row">
+
+            <!-- Report Form -->
+            <div class="col-lg-8">
+
+              <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-4">
+
+                  <h2 class="fw-bold mb-4">
+                    <i class="fas fa-exclamation-circle text-success me-2"></i>
+                    Create Report Incident Type
+                  </h2>
+
+                  <form action="/report/type-create" method="POST">
+                    <!-- name -->
+                    <div class="row">
+
+                      <div class="col-md-12 mb-3">
+                        <label class="form-label fw-semibold">Incident Type Name<span
+                            class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Enter incident type name"
+                          name="incidenttypeName" required>
+                      </div>
+
+                      <div class="col-md-12 mb-3">
+                        <label class="form-label fw-semibold">Description</label>
+                        <input type="text" class="form-control" name="description" placeholder="Enter description">
+                      </div>
+
+                    </div>
+
+
+                    <!-- Buttons -->
+                    <div class="d-flex gap-3">
+
+                      <a href="/report/all" class="btn btn-light border px-4">
+                        Cancel
+                      </a>
+
+                      <button class="btn btn-success px-5">
+
+                        <i class="fas fa-paper-plane me-2"></i>
+
+                        Submit
+
+                      </button>
+
+                    </div>
+
+                  </form>
+
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Right Side -->
+            <div class="col-lg-4">
+
+              <!-- Important Card -->
+              <div class="card border-success shadow-sm rounded-4 mb-4">
+
+                <div class="card-body">
+
+                  <h4 class="text-success mb-3">
+
+                    <i class="fas fa-circle-info me-2"></i>
+
+                    Important
+
+                  </h4>
+
+                  <ul class="list-unstyled">
+
+                    <li class="mb-3">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Harassment or unwanted behavior.
+                    </li>
+
+                    <li class="mb-3">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Sexual harassment or inappropriate conduct.
+                    </li>
+
+                    <li class="mb-3">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Stalking or unwanted following.
+                    </li>
+
+                    <li class="mb-3">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Physical assault or domestic violence.
+                    </li>
+
+                    <li class="mb-3">
+                      <i class="fas fa-check text-success me-2"></i>
+                      Threats, abuse, or intimidation.
+                    </li>
+
+                    <li>
+                      <i class="fas fa-check text-success me-2"></i>
+                      Cybercrime, online harassment, or other incidents.
+                    </li>
+                  </ul>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <section class="panel mt-5">
+            <div class="panel-header">
+              <div>
+                <h2 class="h5 mb-1 section-title"><span>Incident Types</span></h2>
+                <p class="text-muted mb-0">Latest Incident Types across the workspace.</p>
+              </div>
+              <div>
+
+                <a class="btn btn-outline-dark btn-sm" href="#">Manage Incident Types</a>
+              </div>
+
+            </div>
+            <div class="table">
+              <table class="table align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col">Sl</th>
+                    <th scope="col">Incident type Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col" colspan="3">Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if(existingType.length===0){ %>
+                    <tr>
+                      <td colspan="6" class="text-center">
+                        ----- No Data Found -----
+                      </td>
+                    </tr>
+                    <% } existingType.forEach((type, index)=> { %>
+                      <tr>
+                        <td>
+
+                          <%= index + 1 %>
+
+                        </td>
+
+                        <td>
+
+                          <%= type.incidenttypeName %>
+
+                        </td>
+
+                        <td>
+                          <%= type.description %>
+                        </td>
+
+                        <td>
+                          <div class="d-flex gap-2 flex-nowrap">
+
+                            <a href="#" class="btn btn-outline-secondary rounded-2">
+                              <i class="fa-solid fa-eye"></i>
+                            </a>
+
+                            <a href="#" class="btn btn-outline-primary rounded-2">
+                              <i class="fa-solid fa-pen"></i>
+                            </a>
+
+                            <a href="#" class="btn btn-outline-danger rounded-2">
+                              <i class="fa-solid fa-trash"></i>
+                            </a>
+
+                          </div>
+                        </td>
+                      </tr>
+                      <% }) %>
+
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="d-flex justify-content-between align-items-center px-4 py-3 mt-2 mb-2">
+        <div>
+          Copyright © 2026 Admin
+          <a href="#" class="fw-bold text-success text-decoration-none">
+            Abhaya
+          </a>
+        </div>
+
+        <div>
+          Professional dashboard template.
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const socket = io();
+
+    const bell = document.getElementById("bell");
+    const count = document.getElementById("count");
+    const notificationBox = document.getElementById("notificationBox");
+
+    socket.on("sosSent", (sos) => {
+
+      // const time = new Date(sos.createdAt).toLocaleString("en-IN");
+
+      // Increase notification count
+      count.textContent = Number(count.textContent) + 1;
+
+      // Store the notification
+      notificationBox.innerHTML += `
+        <div class="alert alert-danger">
+            <strong>SOS Alert</strong><br>
+            ${sos.user} has sent an SOS alert. <br> Location: ${sos.location}. <br> Time: ${new Date(sos.createdAt).toLocaleString("en-IN")}.
+        </div>`;
+    });
+
+    // Show notifications when the bell is clicked
+    // bell.addEventListener("click", () => {
+
+    //   if (notificationBox.style.display === "none") {
+    //     notificationBox.style.display = "block";
+    //     count.textContent = 0;
+    //   } else {
+    //     notificationBox.style.display = "none";
+    //   }
+
+    // });
+
+  </script>
+
+   <script src="../js/flash.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../assets/js/chart.js"></script>
+
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+
+</html>

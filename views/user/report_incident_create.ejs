@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="adminHMD professional admin dashboard template">
+    <title>Dashboard | Abhaya</title>
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="admin-shell">
+        <div class="sidebar-backdrop" data-sidebar-close></div>
+
+        <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+            <div class="sidebar-header" style="display: flex; justify-content: center;">
+
+        <div>
+          <a class="brand-mark" href="/user/dashboard" aria-label="adminHMD dashboard">
+            <img src="/img/core-img/abhaya-logo.png" alt="Abhaya Logo" style="height: 55px; width: 110px;">
+
+          </a>
+          <span class="brand-title">User Dashboard</span>
+        </div>
+      </div>
+
+            <nav class="sidebar-nav">
+                <a class="nav-link" href="/user/dashboard" aria-current="page">
+                    <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+
+                <a href="/user/profile" class="nav-link">
+                    <span class="nav-icon"><i class="bi bi-person-badge" aria-hidden="true"></i></span>
+                    <span class="nav-text">Profile</span>
+                </a>
+
+                <a href="/user/location" class="nav-link">
+                    <span class="nav-icon"><i class="fa-solid fa-location-dot"></i></span>
+                    <span class="nav-text">Live Location</span>
+                </a>
+
+                <a href="/contact/all" class="nav-link">
+                    <span class="nav-icon"><i class="fas fa-address-book"></i></span>
+                    <span class="nav-text">Emergency Contacts</span>
+                </a>
+
+                <a href="/report/view" class="nav-link active">
+                    <span class="nav-icon"><i class="fas fa-exclamation-circle"></i></span>
+                    <span class="nav-text">Report Incident</span>
+                </a>
+
+                <a href="/sos/history" class="nav-link">
+                    <span class="nav-icon"><i class="fas fa-history"></i></span>
+                    <span class="nav-text">SOS History</span>
+                </a>
+
+                <a href="/user/safetytips" class="nav-link">
+                    <span class="nav-icon"><i class="fas fa-user-shield"></i></span>
+                    <span class="nav-text">Safety Tips</span>
+                </a>
+
+                </a>
+                <a href="/user/settings" class="nav-link">
+                    <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+                    <span class="nav-text">Settings</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <span class="status-dot"></span>
+                <span class="sidebar-footer-text">System running smoothly</span>
+            </div>
+        </aside>
+
+        <div class="admin-main">
+            <nav class="navbar admin-navbar navbar-expand bg-white">
+                <div class="container-fluid px-3 px-lg-4">
+                    <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar"
+                        aria-expanded="true" aria-label="Toggle sidebar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+                        <input class="form-control search-input" type="search"
+                            placeholder="Search users, orders, reports" aria-label="Search">
+                    </form>
+
+                    <button id="sosBtn" class="btn btn-danger me-4">
+                        Emergency SOS
+                    </button>
+
+                    <div class="navbar-actions ms-auto">
+                        <button class="icon-button theme-toggle" type="button" data-theme-toggle
+                            aria-label="Switch color theme" title="Switch color theme">
+                            <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown">
+              <div class="notification">
+                <button class="icon-button" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                  aria-label="Notifications">
+
+                  <i class="bi bi-bell" aria-hidden="true" id="bell"></i>
+                  <span id="count" class="notificationbadge">0</span>
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-end notification-menu" id="notificationBox">
+                  <div class="dropdown-header fw-bold text-body">Notifications</div>
+
+                </div>
+              </div>
+            </div>
+
+                        <div class="dropdown">
+
+                            <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <!-- <img class="avatar-img avatar-sm" src="../assets/images/avatar/avatar.jpg" alt="Admin Hasan"> -->
+                                <span class="d-none d-sm-inline">
+                                    <%= userData.name %>
+                                </span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
+                                <li><a class="dropdown-item" href="/user/settings">Account settings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/auth/logout">Sign out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="dashboard-content">
+                <div class="container-fluid px-3 px-lg-4 py-4">
+                    <div class="page-heading">
+                        <div class="page-heading-copy">
+                            <span class="page-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+
+                            <div>
+                                <p class="eyebrow mb-1">Overview</p>
+                                <h1 class="h3 mb-1">Report</h1>
+                                <p class="text-muted mb-0">Your personal safety hub for emergency assistance, live
+                                    location sharing, and
+                                    trusted contact management.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <!-- Report Form -->
+                        <div class="col-lg-8">
+
+                            <div class="card shadow-sm border-0 rounded-4">
+                                <div class="card-body p-4">
+
+                                    <h2 class="fw-bold mb-4">
+                                        <i class="fas fa-exclamation-circle text-danger me-2"></i>
+                                        Report an Incident
+                                    </h2>
+
+                                    <div class="alert alert-danger bg-light border-danger">
+                                        Your report will be kept confidential. Please provide as much detail as
+                                        possible.
+                                    </div>
+
+                                    <form action="/report/create" method="POST" enctype="multipart/form-data">
+
+                                        <!-- Incident Type Id -->
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Incident Type <span
+                                                    class="text-danger">*</span></label>
+
+                                            <select class="form-select" name="incidentTypeId" required>
+                                                <option value="">Select Incident</option>
+                                                
+                                                <% incidentTypes.forEach(type => { %>
+                                                <option value="<%= type._id %>"><%= type.incidenttypeName %></option>
+                                                <% }); %>
+                                                
+                                            </select>
+                                        </div>
+
+                                        <!-- Date & Time -->
+                                        <div class="row">
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Date</label>
+                                                <input type="date" class="form-control" name="date" required>
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label fw-semibold">Time</label>
+                                                <input type="time" class="form-control" name="time" required>
+                                            </div>
+
+                                        </div>
+
+                                        <input type="hidden" name="latitude" id="latitude">
+                                        <input type="hidden" name="longitude" id="longitude">
+
+
+                                        <!-- Location -->
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold">Location</label>
+
+                                            <!-- <label>Location</label> -->
+
+                                            <div class="input-group">
+
+                                                <span class="input-group-text">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                </span>
+
+                                                <input type="text" id="location" name="location" class="form-control"
+                                                    placeholder="Enter your location or use current location" required>
+
+                                                <button type="button" class="btn btn-outline-danger"
+                                                    onclick="getCurrentLocation()">
+
+                                                    <i class="fas fa-location-crosshairs"></i>
+                                                    Use My Location
+
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                        <!-- Description -->
+                                        <div class="mb-3">
+
+                                            <label class="form-label fw-semibold">
+                                                Description
+                                            </label>
+
+                                            <textarea class="form-control" rows="6"
+                                                placeholder="Describe what happened..." name="description"></textarea>
+
+                                        </div>
+
+                                        <!-- Evidence -->
+                                        <div class="mb-3">
+
+                                            <label class="form-label fw-semibold">
+                                                Upload Evidence (Optional)
+                                            </label>
+
+                                            <input type="file" class="form-control" name="evidence">
+
+                                        </div>
+
+                                        <!-- Severity -->
+                                        <div class="mb-3">
+
+                                            <label class="form-label fw-semibold">
+                                                Severity
+                                            </label>
+
+                                            <div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="severity"
+                                                        value="Low">
+
+                                                    <label class="form-check-label">
+                                                        Low
+                                                    </label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="severity"
+                                                        value="Medium">
+
+                                                    <label class="form-check-label">
+                                                        Medium
+                                                    </label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="severity"
+                                                        value="High" checked>
+
+                                                    <label class="form-check-label text-danger">
+                                                        High
+                                                    </label>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Anonymous -->
+                                        <div class="form-check mb-4">
+
+                                            <input class="form-check-input" type="checkbox" name="anonymous">
+
+                                            <label class="form-check-label">
+                                                Submit anonymously
+                                            </label>
+
+                                        </div>
+
+                                        <!-- Buttons -->
+                                        <div class="d-flex gap-3">
+
+                                            <a href="/report/view" class="btn btn-light border px-4">
+                                                Cancel
+                                            </a>
+
+                                            <button class="btn btn-danger px-5">
+
+                                                <i class="fas fa-paper-plane me-2"></i>
+
+                                                Submit Report
+
+                                            </button>
+
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Right Side -->
+                        <div class="col-lg-4">
+
+                            <!-- Important Card -->
+                            <div class="card border-danger shadow-sm rounded-4 mb-4">
+
+                                <div class="card-body">
+
+                                    <h4 class="text-danger mb-3">
+
+                                        <i class="fas fa-circle-info me-2"></i>
+
+                                        Important
+
+                                    </h4>
+
+                                    <ul class="list-unstyled">
+
+                                        <li class="mb-3">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            Do not include false information.
+                                        </li>
+
+                                        <li class="mb-3">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            Share accurate location details.
+                                        </li>
+
+                                        <li class="mb-3">
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            Upload photos/videos if available.
+                                        </li>
+
+                                        <li>
+                                            <i class="fas fa-check text-success me-2"></i>
+                                            False reports may lead to legal action.
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+
+            <footer class="d-flex justify-content-between align-items-center px-4 py-3 mt-2 mb-2">
+                <div>
+                    Copyright © 2026 User
+                    <a href="#" class="fw-bold text-success text-decoration-none">
+                        Abhaya
+                    </a>
+                </div>
+
+                <div>
+                    Professional dashboard template.
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <script>
+        async function getCurrentLocation() {
+
+            if (!navigator.geolocation) {
+                alert("Geolocation is not supported.");
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(async (position) => {
+
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+
+                document.getElementById("latitude").value = lat;
+                document.getElementById("longitude").value = lng;
+
+                try {
+
+                    const response = await fetch(
+                        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+                    );
+
+                    const data = await response.json();
+
+                    document.getElementById("location").value = data.display_name;
+
+                } catch (err) {
+
+                    document.getElementById("location").value = `${lat}, ${lng}`;
+
+                }
+
+            }, (error) => {
+
+                alert("Please allow location access.");
+
+            });
+
+        }
+        
+    </script>
+
+    <script>
+
+    document.getElementById("sosBtn").addEventListener("click", () => {
+
+      if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser.");
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+
+        async (position) => {
+
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          // console.log("Latitude:", latitude);
+          // console.log("Longitude:", longitude);
+
+          try {
+
+            const response = await fetch("/sos/send", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                latitude,
+                longitude
+              })
+            });
+
+            const data = await response.json();
+            const btn = document.getElementById("sosBtn");
+
+            alert(data.message);
+
+          } catch (err) {
+            console.error(err);
+            alert("Failed to send SOS.");
+          }
+
+        },
+
+        (error) => {
+
+          console.error(error);
+
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              alert("Location permission denied.");
+              break;
+
+            case error.POSITION_UNAVAILABLE:
+              alert("Location unavailable.");
+              break;
+
+            case error.TIMEOUT:
+              alert("Location request timed out.");
+              break;
+
+            default:
+              alert("Unable to get location.");
+          }
+        }
+
+      );
+
+    });
+
+  </script>
+
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="adminHMD professional admin dashboard template">
+    <title>Dashboard | Abhaya</title>
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="admin-shell">
+        <div class="sidebar-backdrop" data-sidebar-close></div>
+
+        <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+            <div class="sidebar-header" style="display: flex; justify-content: center;">
+
+        <div>
+          <a class="brand-mark" href="/user/dashboard" aria-label="adminHMD dashboard">
+            <img src="/img/core-img/abhaya-logo.png" alt="Abhaya Logo" style="height: 55px; width: 110px;">
+
+          </a>
+          <span class="brand-title">User Dashboard</span>
+        </div>
+      </div>
+
+            <nav class="sidebar-nav">
+                <a class="nav-link" href="/user/dashboard" aria-current="page">
+                    <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+
+                <a href="/user/profile" class="nav-link">
+                    <span class="nav-icon"><i class="bi bi-person-badge" aria-hidden="true"></i></span>
+                    <span class="nav-text">Profile</span>
+                </a>
+
+                <a href="/user/location" class="nav-link">
+                    <span class="nav-icon"><i class="fa-solid fa-location-dot"></i></span>
+                    <span class="nav-text">Live Location</span>
+                </a>
+
+                <a href="/contact/all" class="nav-link">
+                    <span class="nav-icon"><i class="fas fa-address-book"></i></span>
+                    <span class="nav-text">Emergency Contacts</span>
+                </a>
+
+                <a href="/report/view" class="nav-link">
+                    <span class="nav-icon"><i class="fas fa-exclamation-circle"></i></span>
+                    <span class="nav-text">Report Incident</span>
+                </a>
+
+                <a href="/sos/history" class="nav-link active">
+                    <span class="nav-icon"><i class="fas fa-history"></i></span>
+                    <span class="nav-text">SOS History</span>
+                </a>
+
+                <a href="/user/safetytips" class="nav-link">
+                    <span class="nav-icon"><i class="fas fa-user-shield"></i></span>
+                    <span class="nav-text">Safety Tips</span>
+                </a>
+
+                </a>
+                <a href="/user/settings" class="nav-link">
+                    <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+                    <span class="nav-text">Settings</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <span class="status-dot"></span>
+                <span class="sidebar-footer-text">System running smoothly</span>
+            </div>
+        </aside>
+
+        <div class="admin-main">
+            <nav class="navbar admin-navbar navbar-expand bg-white">
+                <div class="container-fluid px-3 px-lg-4">
+                    <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar"
+                        aria-expanded="true" aria-label="Toggle sidebar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+                        <input class="form-control search-input" type="search"
+                            placeholder="Search users, orders, reports" aria-label="Search">
+                    </form>
+
+                    <button id="sosBtn" class="btn btn-danger me-4">
+                        Emergency SOS
+                    </button>
+
+                    <div class="navbar-actions ms-auto">
+                        <button class="icon-button theme-toggle" type="button" data-theme-toggle
+                            aria-label="Switch color theme" title="Switch color theme">
+                            <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown">
+              <div class="notification">
+                <button class="icon-button" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                  aria-label="Notifications">
+
+                  <i class="bi bi-bell" aria-hidden="true" id="bell"></i>
+                  <span id="count" class="notificationbadge">0</span>
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-end notification-menu" id="notificationBox">
+                  <div class="dropdown-header fw-bold text-body">Notifications</div>
+
+                </div>
+              </div>
+            </div>
+
+                        <div class="dropdown">
+
+                            <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <!-- <img class="avatar-img avatar-sm" src="../assets/images/avatar/avatar.jpg" alt="Admin Hasan"> -->
+                                <span class="d-none d-sm-inline">
+                                    <%= userData.name %>
+                                </span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
+                                <li><a class="dropdown-item" href="/user/settings">Account settings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/auth/logout">Sign out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="dashboard-content">
+                <div class="container-fluid px-3 px-lg-4 py-4">
+                    <div class="page-heading">
+                        <div class="page-heading-copy">
+                            <span class="page-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+
+                            <div>
+                                <p class="eyebrow mb-1">Overview</p>
+                                <h1 class="h3 mb-1">Sos History</h1>
+                                <p class="text-muted mb-0">Your personal safety hub for emergency assistance, live
+                                    location sharing, and trusted contact management.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container-fluid py-4">
+
+                        <!-- Page Heading -->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="card-header bg-danger text-white rounded-2" style="width: 100%;">
+                                <h3 class="fw-bold m-2">
+                                    <i class="fa-solid fa-history"></i> SOS History
+                                </h3>
+                                <!-- <p class="text-muted mb-0 text-white">View all your previous emergency requests.</p> -->
+                            </div>
+
+                            <!-- <a href="/user/dashboard" class="btn btn-primary">
+                                    <i class="fa-solid fa-house"></i> Dashboard
+                                </a> -->
+                        </div>
+
+                        <!-- Search & Filter -->
+                        <div class="card shadow-sm border-0 mb-4">
+                            <div class="card-body">
+
+                                <form action="/sos/day" method="GET">
+
+                                    <div class="row">
+
+                                        <div class="col-md-5">
+                                            <input type="date" name="date" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <select name="status" class="form-select">
+
+                                                <option value="">All Status</option>
+                                                <option value="Active">Active</option>
+                                                <option value="Resolved">Resolved</option>
+
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <button class="btn btn-success w-100">
+                                                <i class="fa-solid fa-filter"></i> Filter
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <!-- History Table -->
+
+                        <div class="card shadow border-0">
+
+                            <div class="card-body">
+
+                                <div class="table-responsive">
+
+                                    <table class="table table-hover align-middle">
+
+                                        <thead class="table-danger">
+
+                                            <tr>
+
+                                                <th>sl</th>
+                                                <th>Date</th>
+                                                <th>Time</th>
+                                                <th>Location</th>
+                                                <th>Status</th>
+                                                <th>Location</th>
+                                               
+
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody>
+
+                                            <% if(sosList.length> 0){ %>
+
+                                                <% sosList.forEach((item,index)=>{ %>
+
+                                                    <tr>
+
+                                                        <td>
+                                                            <%= index+1 %>
+                                                        </td>
+
+                                                        <td>
+                                                            <%= new Date(item.createdAt).toLocaleDateString() %>
+                                                        </td>
+
+                                                        <td>
+                                                            <%= new Date(item.createdAt).toLocaleTimeString() %>
+                                                        </td>
+
+                                                        <td>
+                                                            <%= item.address %>
+
+                                                        </td>
+
+                                                        <td>
+
+                                                            <% if(item.status=="Active" ){ %>
+
+                                                                <span class="badge bg-danger">
+                                                                    Active
+                                                                </span>
+
+                                                                <% } else { %>
+
+                                                                    <span class="badge bg-success">
+                                                                        Resolved
+                                                                    </span>
+
+                                                                    <% } %>
+
+                                                        </td>
+
+                                                        <td>
+
+                                                            <a href="https://www.google.com/maps?q=<%= item.location.coordinates[1] %>,<%= item.location.coordinates[0] %>"
+                                                                target="_blank" class="btn btn-sm btn-outline-primary">
+
+                                                                <i class="fa-solid fa-location-dot"></i>
+                                                                View Map
+
+                                                            </a>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                    <!-- Modal -->
+
+                                                    <div class="modal fade" id="viewModal<%= item._id %>" tabindex="-1">
+
+                                                        <div class="modal-dialog">
+
+                                                            <div class="modal-content">
+
+                                                                <div class="modal-header bg-danger text-white">
+
+                                                                    <h5 class="modal-title">
+                                                                        SOS Details
+                                                                    </h5>
+
+                                                                    <button class="btn-close btn-close-white"
+                                                                        data-bs-dismiss="modal">
+                                                                    </button>
+
+                                                                </div>
+
+                                                                <div class="modal-body">
+
+                                                                    <p>
+                                                                        <strong>Date :</strong>
+                                                                        <%= new
+                                                                            Date(item.createdAt).toLocaleDateString() %>
+                                                                    </p>
+
+                                                                    <p>
+
+                                                                        <strong>Time :</strong>
+                                                                        <%= new
+                                                                            Date(item.createdAt).toLocaleTimeString() %>
+
+                                                                    </p>
+
+                                                                    <p>
+
+                                                                        <strong>Status :</strong>
+                                                                        <%= item.status %>
+
+                                                                    </p>
+
+                                                                    <p>
+                                                                        <strong>Location :</strong>
+
+                                                                    </p>
+                                                                    <p>
+
+                                                                        <strong>Latitude :</strong>
+                                                                        <%= item.location.coordinates[1] %>
+
+                                                                    </p>
+
+                                                                    <p>
+
+                                                                        <strong>Longitude :</strong>
+                                                                        <%= item.location.coordinates[0] %>
+
+                                                                    </p>
+
+                                                                    <a href="https://www.google.com/maps?q=<%= item.location.coordinates[1] %>,<%= item.location.coordinates[0] %>"
+                                                                        target="_blank" class="btn btn-primary w-100">
+
+                                                                        <i class="fa-solid fa-map-location-dot"></i>
+
+                                                                        Open in Google Maps
+
+                                                                    </a>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <% })} else { %>
+
+                                                        <tr>
+
+                                                            <td colspan="6" class="text-center py-5">
+
+                                                                <i
+                                                                    class="fa-solid fa-clock-rotate-left fa-3x text-secondary mb-3"></i>
+
+                                                                <h5>No SOS History Found</h5>
+
+                                                            </td>
+
+                                                        </tr>
+
+                                                        <% } %>
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="d-flex justify-content-between align-items-center px-4 py-3 mt-2 mb-2">
+                <div>
+                    Copyright © 2026 User
+                    <a href="#" class="fw-bold text-success text-decoration-none">
+                        Abhaya
+                    </a>
+                </div>
+
+                <div>
+                    Professional dashboard template.
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <script>
+        // Replace the filtered URL with the normal page URL
+        if (window.location.search) {
+            window.history.replaceState({}, "", "/sos/history");
+        }
+    </script>
+
+    <script>
+
+    document.getElementById("sosBtn").addEventListener("click", () => {
+
+      if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser.");
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+
+        async (position) => {
+
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          // console.log("Latitude:", latitude);
+          // console.log("Longitude:", longitude);
+
+          try {
+
+            const response = await fetch("/sos/send", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                latitude,
+                longitude
+              })
+            });
+
+            const data = await response.json();
+            const btn = document.getElementById("sosBtn");
+
+            alert(data.message);
+
+          } catch (err) {
+            console.error(err);
+            alert("Failed to send SOS.");
+          }
+
+        },
+
+        (error) => {
+
+          console.error(error);
+
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              alert("Location permission denied.");
+              break;
+
+            case error.POSITION_UNAVAILABLE:
+              alert("Location unavailable.");
+              break;
+
+            case error.TIMEOUT:
+              alert("Location request timed out.");
+              break;
+
+            default:
+              alert("Unable to get location.");
+          }
+        }
+
+      );
+
+    });
+
+  </script>
+
+
+</body>
+
+</html>

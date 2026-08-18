@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="adminHMD professional admin dashboard template">
+  <title>Dashboard | Abhaya</title>
+
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <link rel="stylesheet" href="../css/flash.css">
+
+</head>
+
+<body>
+  <div class="admin-shell">
+    <div class="sidebar-backdrop" data-sidebar-close></div>
+
+    <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+      <div class="sidebar-header" style="display: flex; justify-content: center;">
+
+        <div>
+          <a class="brand-mark" href="/user/dashboard" aria-label="adminHMD dashboard">
+            <img src="/img/core-img/abhaya-logo.png" alt="Abhaya Logo" style="height: 55px; width: 110px;">
+
+          </a>
+          <span class="brand-title">User Dashboard</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-link active" href="/user/dashboard" aria-current="page">
+          <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+          <span class="nav-text">Dashboard</span>
+        </a>
+
+        <a href="/user/profile" class="nav-link">
+          <span class="nav-icon"><i class="bi bi-person-badge" aria-hidden="true"></i></span>
+          <span class="nav-text">Profile</span>
+        </a>
+
+        <a href="/user/location" class="nav-link">
+          <span class="nav-icon"><i class="fa-solid fa-location-dot"></i></span>
+          <span class="nav-text">Live Location</span>
+        </a>
+
+        <a href="/contact/all" class="nav-link">
+          <span class="nav-icon"><i class="fas fa-address-book"></i></span>
+          <span class="nav-text">Emergency Contacts</span>
+        </a>
+
+        <a href="/report/view" class="nav-link">
+          <span class="nav-icon"><i class="fas fa-exclamation-circle"></i></span>
+          <span class="nav-text">Report Incident</span>
+        </a>
+
+        <a href="/sos/history" class="nav-link">
+          <span class="nav-icon"><i class="fas fa-history"></i></span>
+          <span class="nav-text">SOS History</span>
+        </a>
+
+        <a href="/user/safetytips" class="nav-link">
+          <span class="nav-icon"><i class="fas fa-user-shield"></i></span>
+          <span class="nav-text">Safety Tips</span>
+        </a>
+
+        </a>
+        <a href="/user/settings" class="nav-link">
+          <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+          <span class="nav-text">Settings</span>
+        </a>
+
+      </nav>
+
+      <div class="sidebar-footer">
+        <span class="status-dot"></span>
+        <span class="sidebar-footer-text">System running smoothly</span>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      <nav class="navbar admin-navbar navbar-expand bg-white">
+        <div class="container-fluid px-3 px-lg-4">
+          <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar"
+            aria-expanded="true" aria-label="Toggle sidebar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+            <input class="form-control search-input" type="search" placeholder="Search users, orders, reports"
+              aria-label="Search">
+          </form>
+
+          <button id="sosBtn" class="btn btn-danger me-4">
+            Emergency SOS
+          </button>
+
+          <div class="navbar-actions ms-auto">
+            <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme"
+              title="Switch color theme">
+              <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+            </button>
+            <div class="dropdown">
+              <div class="notification">
+                <button class="icon-button" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                  aria-label="Notifications">
+
+                  <i class="bi bi-bell" aria-hidden="true" id="bell"></i>
+                  <span id="count" class="notificationbadge">0</span>
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-end notification-menu" id="notificationBox">
+                  <div class="dropdown-header fw-bold text-body">Notifications</div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="dropdown">
+
+              <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                <!-- <img class="avatar-img avatar-sm" src="../assets/images/avatar/avatar.jpg" alt="Admin Hasan"> -->
+                <span class="d-none d-sm-inline">
+                  <%= userData.name %>
+                </span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
+                <li><a class="dropdown-item" href="/user/settings">Account settings</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="/auth/logout">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          <div class="page-heading">
+            <div class="page-heading-copy">
+              <span class="page-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+
+              <div>
+                <p class="eyebrow mb-1">Overview</p>
+                <h1 class="h3 mb-1">Dashboard</h1>
+                <p class="text-muted mb-0">Your personal safety hub for emergency assistance, live location sharing, and
+                  trusted contact management.</p>
+              </div>
+            </div>
+
+          </div>
+
+          <% if (success && success.length> 0) { %>
+            <div id="successAlert" class="custom-alert success-alert">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>
+                <%= success[0] %>
+              </span>
+              <button type="button" class="alert-close" onclick="this.parentElement.remove()">
+                &times;
+              </button>
+            </div>
+            <% } %>
+
+              <% if (error && error.length> 0) { %>
+                <div id="errorAlert" class="custom-alert error-alert">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  <span>
+                    <%= error[0] %>
+                  </span>
+                  <button type="button" class="alert-close" onclick="this.parentElement.remove()">
+                    &times;
+                  </button>
+                </div>
+                <% } %>
+
+                  <section class="row g-3 mt-1" aria-label="Dashboard metrics">
+
+                    <div class="col-lg-4 col-sm-6 col-xl-4">
+                      <article class="metric-card metric-danger">
+                        <div class="metric-top">
+                          <span class="metric-label">SOS Sent</span>
+                          <span class="metric-icon"><i class="fa-solid fa-shield-heart text-danger fs-2"></i></span>
+                        </div>
+                        <div class="metric-value">
+                          <%= allSos.length %>
+                        </div>
+                        <div class="metric-meta">
+                          <span class="text-danger">Total SOS Alerts</span>
+                          <!-- <span>need review</span> -->
+                        </div>
+                      </article>
+                    </div>
+
+                    <div class="col-lg-4 col-sm-6 col-xl-4">
+                      <article class="metric-card metric-success">
+                        <div class="metric-top">
+                          <span class="metric-label">Emergency Contacts</span>
+                          <span class="metric-icon"><i class="fa-solid fa-user-group text-success fs-2"></i></span>
+                        </div>
+                        <div class="metric-value">
+                          <%= allContacts.length %>
+                        </div>
+                        <div class="metric-meta">
+                          <!-- <span class="text-success">3</span> -->
+                          <span class="text-success">Saved Contacts</span>
+                        </div>
+                      </article>
+                    </div>
+
+                    <div class="col-lg-4 col-sm-6 col-xl-4">
+                      <article class="metric-card metric-warning">
+                        <div class="metric-top">
+                          <span class="metric-label">Reports</span>
+                          <span class="metric-icon"><i
+                              class="fa-solid fa-file-circle-exclamation text-warning fs-2"></i></span>
+                        </div>
+                        <div class="metric-value">
+                          <%= allReports.length %>
+                        </div>
+                        <div class="metric-meta">
+                          <span class="text-warning">Submitted Reports</span>
+
+                        </div>
+                      </article>
+                    </div>
+                  </section>
+
+                  <section class="row g-3 mt-5">
+                    <!-- SOS -->
+                    <div class="col-12 col-xl-8">
+
+                      <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+                        <h4 class="fw-bold mb-0 p-3">Active SOS Alert</h4>
+
+                        <% if(activeSOS && activeSOS.length> 0){ %>
+                          <span class="badge bg-danger m-3 p-2">LIVE</span>
+                          <% } %>
+                      </div>
+
+                      <div class="card-body p-2 bg-white rounded-4">
+
+                        <% if(activeSOS && activeSOS.length> 0){ %>
+                          <% activeSOS.forEach(sos=> { %>
+
+                            <div class="row">
+
+                              <!-- Left Side -->
+                              <div class="col-lg-6 border-end mt-3 ps-4">
+
+                                <div class="d-flex align-items-center mb-4">
+
+                                  <img src="<%= sos.user.image %>" class="rounded-circle me-3" width="60" height="60">
+
+                                  <div>
+                                    <h5 class="mb-1">
+                                      <%= sos.user.fullName %>
+                                    </h5>
+
+                                    <div class="text-muted">
+                                      <i class="fa-solid fa-phone"></i>
+                                      <%= sos.user.phone %>
+                                    </div>
+
+                                    <% const birthDate=new Date(sos.user.dob); const today=new Date(); let
+                                      age=today.getFullYear() - birthDate.getFullYear(); const
+                                      monthDiff=today.getMonth() - birthDate.getMonth(); if (monthDiff < 0 ||
+                                      (monthDiff===0 && today.getDate() < birthDate.getDate())) { age--; } %>
+
+                                      <div class="text-muted">
+                                        <i class="fa-solid fa-user"></i>
+                                        <%= sos.user.gender %>,
+                                          <%= age %> years old
+                                      </div>
+                                  </div>
+
+                                </div>
+
+                                <div class="mb-3">
+                                  <h6>
+                                    <i class="fa-solid fa-location-dot text-secondary"></i>
+                                    Location
+                                  </h6>
+
+                                  <p id="locationName">Loading location...</p>
+
+                                  <script>
+
+                                    const latitude = "<%= sos.location.coordinates[1] %>";
+                                    const longitude = "<%= sos.location.coordinates[0] %>";
+
+                                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+                                      .then(res => res.json())
+                                      .then(data => {
+                                        document.getElementById("locationName").textContent = data.display_name;
+                                      })
+                                      .catch(() => {
+                                        document.getElementById("locationName").textContent = "Location not available";
+                                      });
+                                  </script>
+
+                                </div>
+
+                                <div class="mb-3">
+                                  <h6>
+                                    <i class="fa-regular fa-clock text-secondary"></i>
+                                    Time
+                                  </h6>
+
+                                  <p class="text-muted">
+                                    <%= new Date(sos.createdAt).toLocaleString() %>
+                                  </p>
+                                </div>
+
+                                <div class="mb-4">
+                                  <strong>Status</strong>
+
+                                  <span class="badge bg-danger ms-2">
+                                    New
+                                  </span>
+                                </div>
+
+                                <a href="/chat/case/<%= sos.soscase._id %>" class="btn btn-primary w-100">
+                                  <i class="fa-regular fa-comments"></i> SOS
+                                  Chat
+                                </a>
+
+                              </div>
+
+                              <!-- Map -->
+
+                              <div class="col-lg-6 text-center">
+
+                                <iframe width="100%" height="390" style="border-radius:15px;border:none;" loading="lazy"
+                                  src="https://maps.google.com/maps?q=<%= sos.location.coordinates[1] %>,<%= sos.location.coordinates[0] %>&z=15&output=embed">
+                                </iframe>
+
+                                <a href="https://www.google.com/maps?q=<%= sos.location.coordinates[1] %>,<%= sos.location.coordinates[0] %>"
+                                  target="_blank" class="btn btn-primary mt-3">
+
+                                  <i class="fa-solid fa-map"></i>
+
+                                  Open in Google Maps
+
+                                </a>
+                              </div>
+                            </div>
+
+                            <% })}else{ %>
+
+                              <!-- Empty State -->
+
+                              <div class="text-center py-5">
+
+                                <img src="/img/core-img/no-alert.png" width="160" class="mb-3">
+
+                                <h3 class="fw-bold text-success">
+                                  No Active SOS Alerts
+                                </h3>
+
+                                <p class="text-muted">
+                                  You currently have no active emergency alerts.
+                                </p>
+
+                                <p class="text-muted">
+                                  If you ever feel unsafe or need immediate assistance,
+                                  use the <strong>SOS</strong> button to send an emergency alert
+                                  with your location to your trusted contacts and emergency services.
+                                </p>
+                                <a href="/sos/history" class="btn btn-outline-primary">
+
+                                  View SOS History
+
+                                </a>
+                              </div>
+
+                              <% } %>
+
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-xl-4">
+                      <div class="panel h-100">
+                        <div class="panel-header">
+                          <div>
+                            <h6 class="h5 mb-1 section-title"><i class="bi bi-activity"
+                                aria-hidden="true"></i><span>Emergency
+                                Contact Numbers</span></h6>
+                            <p class="text-muted mb-0">Important Emergency Numbers</p>
+                          </div>
+                        </div>
+                        <div class="row ms-3 mb-5">
+
+                          <div class="number-card">
+
+                            <i class="fa-solid fa-shield text-primary me-3"></i>
+
+                            <span class="mt-3 me-5 h5">Police</span>
+
+                            <span class="mt-3 ms-3 me-3 h5">100</span>
+
+                            <a href="tel:100" class="btn btn-outline-primary mt-2 mb-3">
+                              Call Now
+                            </a>
+
+                          </div>
+
+                          <div class="number-card">
+
+                            <i class="fa-solid fa-truck-medical text-danger"></i>
+
+                            <span class="mt-3 ms-3 me-3 h5">Ambulance</span>
+
+                            <span class="mt-3 me-3 h5">108</span>
+
+                            <a href="tel:108" class="btn btn-outline-danger mt-2 mb-3">
+                              Call Now
+                            </a>
+
+                          </div>
+
+                          <div class="number-card">
+
+                            <i class="fa-solid fa-fire text-warning"></i>
+                            <span class="mt-3 ms-4 me-3 h5">Fire Service</span>
+                            <span class="mt-3 me-2 h5">101</span>
+                            <a href="tel:101" class="btn btn-outline-warning mt-2 mb-3">
+                              Call Now
+                            </a>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </section>
+
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card border-0 shadow-sm rounded-4 mt-4">
+          <div class="card-body">
+
+            <h4 class="fw-bold mb-4">Quick Actions</h4>
+
+            <div class="row text-center">
+
+              <div class="col">
+                <a href="#" class="text-decoration-none">
+                  <i class="fa-solid fa-location-arrow fs-2 text-success"></i>
+                  <p class="mt-2">Share Location</p>
+                </a>
+              </div>
+
+              <div class="col">
+                <a href="/report/view" class="text-decoration-none">
+                  <i class="fa-solid fa-file-circle-plus fs-2 text-danger"></i>
+                  <p class="mt-2">Report Incident</p>
+                </a>
+              </div>
+
+              <div class="col">
+                <a href="#" class="text-decoration-none">
+                  <i class="fa-solid fa-building-shield fs-2 text-primary"></i>
+                  <p class="mt-2">Nearby Police</p>
+                </a>
+              </div>
+
+              <div class="col">
+                <a href="/user/safetytips" class="text-decoration-none">
+                  <i class="fa-solid fa-lightbulb fs-2 text-warning"></i>
+                  <p class="mt-2">Safety Tips</p>
+                </a>
+              </div>
+
+              <div class="col">
+                <a href="#" class="text-decoration-none">
+                  <i class="fa-solid fa-phone fs-2 text-info"></i>
+                  <p class="mt-2">Helpline</p>
+                </a>
+              </div>
+            </div>
+          </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="d-flex justify-content-between align-items-center px-4 py-3 mt-2 mb-2">
+        <div>
+          Copyright © 2026 User
+          <a href="#" class="fw-bold text-success text-decoration-none">
+            Abhaya
+          </a>
+        </div>
+
+        <div>
+          Professional dashboard template.
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+   console.log("1st working");
+   
+    document.getElementById("sosBtn").addEventListener("click", () => {
+
+      if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser.");
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+
+        async (position) => {
+
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          console.log("Latitude:", latitude);
+          console.log("Longitude:", longitude);
+
+          try {
+
+            const response = await fetch("/sos/send", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                latitude: latitude,
+                longitude: longitude
+              })
+            });
+
+            console.log("Response status:", response.status);
+
+            const data = await response.json();
+
+            console.log("Backend response:", data);
+
+            if (!response.ok) {
+              alert(data.message || "Failed to send SOS.");
+              return;
+            }
+
+            alert(data.message || "SOS sent successfully.");
+
+          } catch (err) {
+
+            console.error("SOS error:", err);
+
+            alert("Failed to send SOS.");
+
+          }
+
+        },
+
+        (error) => {
+
+          console.error("Location error:", error);
+
+          switch (error.code) {
+
+            case error.PERMISSION_DENIED:
+              alert("Location permission denied.");
+              break;
+
+            case error.POSITION_UNAVAILABLE:
+              alert("Location unavailable.");
+              break;
+
+            case error.TIMEOUT:
+              alert("Location request timed out.");
+              break;
+
+            default:
+              alert("Unable to get location.");
+          }
+
+        }
+
+      );
+
+    });
+  </script>
+
+  <script src="../js/flash.js"></script>
+
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+
+</html>

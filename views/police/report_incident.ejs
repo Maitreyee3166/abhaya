@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="adminHMD professional admin dashboard template">
+    <title>Dashboard | Abhaya</title>
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <script src="/socket.io/socket.io.js"></script>
+
+</head>
+
+<body>
+    <div class="admin-shell">
+        <div class="sidebar-backdrop" data-sidebar-close></div>
+
+        <aside class="admin-sidebar" id="adminSidebar" aria-label="Main navigation">
+            <div class="sidebar-header" style="display: flex; justify-content: center;">
+
+        <div>
+          <a class="brand-mark" href="/user/dashboard" aria-label="adminHMD dashboard">
+            <img src="/img/core-img/abhaya-logo.png" alt="Abhaya Logo" style="height: 55px; width: 114px;">
+
+          </a>
+          <span class="brand-title">Police Dashboard</span>
+        </div>
+      </div>
+
+            <nav class="sidebar-nav">
+                <a class="nav-link" href="/police/dashboard" aria-current="page">
+                    <span class="nav-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+
+                <a href="/user/profile" class="nav-link">
+                    <span class="nav-icon"><i class="bi bi-person-badge" aria-hidden="true"></i></span>
+                    <span class="nav-text">Profile</span>
+
+                </a>
+
+                <a href="/report/all" class="nav-link active">
+                    <span class="nav-icon"><i class="fas fa-exclamation-circle"></i></span>
+                    <span class="nav-text">Report Incident</span>
+                </a>
+
+                <a href="/sos/case-history" class="nav-link">
+                    <span class="nav-icon"><i class="fas fa-history"></i></span>
+                    <span class="nav-text">SOS History</span>
+                </a>
+
+                <a href="/user/safetytips" class="nav-link">
+                    <span class="nav-icon"><i class="fas fa-user-shield"></i></span>
+                    <span class="nav-text">Safety Tips</span>
+                </a>
+
+                </a>
+                <a href="/user/settings" class="nav-link">
+                    <span class="nav-icon"><i class="bi bi-gear" aria-hidden="true"></i></span>
+                    <span class="nav-text">Settings</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <span class="status-dot"></span>
+                <span class="sidebar-footer-text">System running smoothly</span>
+            </div>
+        </aside>
+
+        <div class="admin-main">
+            <nav class="navbar admin-navbar navbar-expand bg-white">
+                <div class="container-fluid px-3 px-lg-4">
+                    <button class="sidebar-toggle" type="button" data-sidebar-toggle aria-controls="adminSidebar"
+                        aria-expanded="true" aria-label="Toggle sidebar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <form class="d-none d-md-flex ms-3 flex-grow-1" role="search">
+                        <input class="form-control search-input" type="search"
+                            placeholder="Search users, orders, reports" aria-label="Search">
+                    </form>
+
+
+                    <div class="navbar-actions ms-auto">
+                        <button class="icon-button theme-toggle" type="button" data-theme-toggle
+                            aria-label="Switch color theme" title="Switch color theme">
+                            <i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown">
+                            <div class="notification">
+                                <button class="icon-button" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false" aria-label="Notifications">
+
+                                    <i class="bi bi-bell" aria-hidden="true" id="bell"></i>
+                                    <span id="count" class="notificationbadge">0</span>
+                                </button>
+
+                                <div class="dropdown-menu dropdown-menu-end notification-menu" id="notificationBox">
+                                    <div class="dropdown-header fw-bold text-body">Notifications</div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown">
+
+                            <button class="profile-button dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <!-- <img class="avatar-img avatar-sm" src="../assets/images/avatar/avatar.jpg" alt="Admin Hasan"> -->
+                                <span class="d-none d-sm-inline">
+                                    <%= userData.name %>
+                                </span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
+                                <li><a class="dropdown-item" href="/user/settings">Account settings</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/auth/logout">Sign out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="dashboard-content">
+                <div class="container-fluid px-3 px-lg-4 py-4">
+                    <div class="page-heading">
+                        <div class="page-heading-copy">
+                            <span class="page-icon"><i class="bi bi-speedometer2" aria-hidden="true"></i></span>
+
+                            <div>
+                                <p class="eyebrow mb-1">Overview</p>
+                                <h1 class="h3 mb-1">Dashboard</h1>
+                                <p class="text-muted mb-0">Your personal safety hub for emergency assistance, live
+                                    location sharing, and trusted contact management.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container-fluid">
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h2 class="fw-bold">
+                                <i class="fas fa-file-alt text-danger me-2"></i>
+                                All Incident Reports
+                            </h2>
+
+
+                        </div>
+
+                        <div class="row">
+                            <% if (reportList && reportList.length> 0) { %>
+
+                            <% reportList.forEach(report=> { %>
+
+                                <!-- Report Card  -->
+
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card shadow-sm border-0 rounded-4 h-100">
+
+                                        <div class="card-body">
+
+                                            <div class="d-flex justify-content-between">
+
+                                                <div>
+                                                    <h5 class="fw-bold">
+                                                        <%= report.incidentType.incidenttypeName %>
+                                                    </h5>
+                                                    
+                                                </div>
+                                                <% if (report.status=='Approved' ) { %>
+                                                    <span class="badge bg-success text-light">
+                                                        <%= report.status %>
+                                                    </span>
+                                                    <% } else if(report.status=='Rejected' ) { %>
+                                                        <span class="badge bg-danger text-light">
+                                                            <%= report.status %>
+                                                        </span>
+                                                        <% } else if(report.status=='Pending' ){ %>
+                                                            <span class="badge bg-warning text-dark">
+                                                                <%= report.status %>
+                                                            </span>
+                                                            <% } else { %>
+                                                                <span class="badge bg-secondary text-light">
+                                                                    <%= report.status %>
+                                                                </span>
+                                                                <% } %>
+
+
+                                            </div>
+
+                                            <hr>
+
+                                            <div>
+                                                <img src="<%= report.evidence %>" alt=""
+                                                    style="height: 150px; width: 537px;">
+                                            </div>
+
+                                            <p class="mt-4">
+                                                <i class="fas fa-calendar-alt text-danger me-2"></i>
+                                                <%= new Date(report.date).toLocaleDateString("en-IN", { day: "numeric" ,
+                                                    month: "long" , year: "numeric" }) %>
+                                            </p>
+
+                                            <p>
+                                                <i class="fas fa-clock text-danger me-2"></i>
+                                                <%= new Date(report.date).toLocaleTimeString("en-IN", { hour: "2-digit"
+                                                    , minute: "2-digit" , hour12: true }) %>
+                                            </p>
+
+                                            <p>
+                                                <i class="fas fa-map-marker-alt text-danger me-2"></i>
+                                                <%= report.location %>
+                                            </p>
+
+                                            <p>
+                                                <i class="fas fa-layer-group text-danger me-2"></i>
+                                                Severity :
+                                                <span class="badge bg-danger">
+                                                    <%= report.severity %>
+                                                </span>
+                                            </p>
+
+                                            <p class="text-muted">
+                                                <%= report.description %>
+                                            </p>
+
+                                            <div class="d-flex gap-2 mt-3">
+                                                <a href="#">
+                                                    <button class="btn btn-outline-primary btn-sm">
+                                                        <i class="fas fa-eye"></i> View
+                                                    </button>
+                                                </a>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <% })} else { %>
+
+                                                        <!-- Empty state -->
+
+                                                        <div class="empty-report-card">
+
+                                                            <div class="empty-report-icon">
+                                                                <i class="fa-solid fa-file-circle-xmark"></i>
+                                                            </div>
+
+                                                            <h3>No Reports Yet</h3>
+
+                                                            <p>
+                                                                There are no incident reports to review yet.
+                                                                Incident reports submitted by users will appear here.
+                                                            </p>
+
+                                                        </div>
+
+                                                        <% } %>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </main>
+
+            <footer class="d-flex justify-content-between align-items-center px-4 py-3 mt-2 mb-2">
+                <div>
+                    Copyright © 2026 Admin
+                    <a href="#" class="fw-bold text-success text-decoration-none">
+                        Abhaya
+                    </a>
+                </div>
+
+                <div>
+                    Professional dashboard template.
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>
