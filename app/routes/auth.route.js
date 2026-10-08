@@ -44,7 +44,7 @@ router.post(
 );
 
 // Google Callback
-router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/auth/login" }), authController.googleLoginSuccess);
+// router.get("/google/callback", passport.authenticate("google", { failureRedirect: "/auth/login" }), authController.googleLoginSuccess);
 
 router.get('/logout', AuthCheck, authController.CheckAuth, authController.logout);
 
